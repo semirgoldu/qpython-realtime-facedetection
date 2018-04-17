@@ -20,11 +20,16 @@ You can get numpy packages on qpython by installing AIPY android mobile app from
 ## Usage
 
 Start socket_server.py
+
 Start IP Webcam Pro
+
 Run video_face_detect.py
 
+
 From here run:
+
 python -m SimpleHTTPServer
+
 
 Go to http://localhost:8000
 
