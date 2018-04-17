@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src="js/socket.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/konva.js"></script>
+<script>
+	
+$(document).ready(function(){
+	var stage=new Konva.Stage({
+	name:"Stage",
+        container: 'container',
+        width: 1280,
+        height: 960
+    });
+    var layer=new Konva.Layer()
+    stage.add(layer);
+    
+var socket = io.connect("http://localhost:8001/web");
+
+socket.on('connect',function(){
+  this.on('new pos',function(
+data){
+	//alert(5)
+	//>alert(data)
+	layer.destroyChildren()
+	layer.draw()
+	//self.box.show=true
+	var boxes=data.split("|");
+	$.each(boxes,function(i,val){
+		var rect=val.split(",")
+		var rectangle = new Konva.Rect({
+       x: parseInt(rect[2]),
+      y: parseInt(rect[3]),
+      width: parseInt(rect[0]),
+      height: parseInt(rect[1]),
+      
+      stroke: 'yellow',
+      strokeWidth: 2
+    });
+	layer.add(rectangle)
+	
+	
+	})
+	layer.draw()
+	//self.box.show=false
+	})
+	//socket.emit('message', 'show me images of George w bush ');
+
+
+	})
+   
+    })
+</script>
+</head>
+<body>
+
+<div style="width:1280px;height:960px;position:relative">
+	<div id="container" style="position:absolute;width:1280px;height:960px;z-index:2;background:transparent"></div>
+	
+<img style="position:absolute;z-index:1;left:0;top:0;" src="http://192.168.43.1:8081/video" >
+</div>
+</body>
+</html>
